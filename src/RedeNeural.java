@@ -120,11 +120,11 @@ public class RedeNeural {
 		}
 		//condiçoes 
 		if (testeYent > limiarTeta) {
-			System.out.println("Resposta eh  " + -1);
+			System.out.println("Resposta eh  " + 1);
 		} else if (testeYent <= limiarTeta && testeYent <= limiarTeta) {
 			System.out.println("Resposta eh  " + 0);
 		} else {
-			System.out.println("Resposta eh  " + 1);
+			System.out.println("Resposta eh  " + -1);
 		}
 
 		sc.close();
