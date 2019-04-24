@@ -44,7 +44,7 @@ public class RedeNeural {
 		TresultadoAnd = AND(); //chamada metodo
 		vetorFyent = new int[8]; //vetor função
 		control = 0;
-		while (control == 8) {  //while para operação 
+		while (operacao) {  //while para operação 
 			
 
 			for (int i = 0; i < entradaX.length; i++) {
@@ -65,7 +65,7 @@ public class RedeNeural {
 					vetorFyent[i] = fyent;
 				}
 
-				if (fyent != TresultadoAnd[i]) {     //calculo fyente for diferente resultado fazer equação  W  =    . [ T – f (Yent) ] . X calculo neuronio
+				if (fyent != TresultadoAnd[i]) {     //calculo fyente for diferente resultado fazer equação  W  =    . [ T – f (Yent) ] . X calculo neuronio
 					for (int G = 0; G < WentradaPesos.length; G++) {
 						WentradaPesos[G] += WentradaPesos[G] * (TresultadoAnd[i] - fyent) * entradaX[i][G];
 					}
@@ -74,8 +74,8 @@ public class RedeNeural {
 				}
 			}
 
-			if (control == 8) {
-				//operacao = false;
+			if (operacao) {
+				operacao = false;
 
 				System.out.print("Pesos Atualizados: \n");   //resultado dos pesos 
 				for (double contadorAuxPesos : WentradaPesos) {
@@ -122,11 +122,11 @@ public class RedeNeural {
 		}
 		//condiçoes 
 		if (testeYent > limiarTeta) {
-			System.out.println("Resposta do último sendo AND é:   " + +1);
+			System.out.println("Resposta do último sendo AND é:   " + 1);
 		} else if (testeYent <= limiarTeta && testeYent <= limiarTeta) {
 			System.out.println("Resposta do último sendo AND é:  " + 0);
 		} else {
-			System.out.println("Resposta do último sendo AND é:  " + 1);
+			System.out.println("Resposta do último sendo AND é:  " + -1);
 		}
 
 		sc.close();
