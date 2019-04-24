@@ -13,21 +13,22 @@ public class RedeNeural {
 		WentradaPesos[],  //entrada pesos  
 		Nusuario,   // entrada digitada pelo usuario  
 		yentCalculo, //variaveis para calculo
-		limiarTeta; // Tèta
+		limiarTeta; // TÃ¨ta
 		int fyent, // variaveis calculo
 		control, // variavel para contador 
 		epocaContador = 0,  // contador zerado 
 		vetorFyent[]; //variavel para usar o calculo
-		double[] Tresultado; //resultado esperado da operação
+		double[] TresultadoAnd; //resultado esperado da operaÃ§Ã£o
 		boolean operacao = true; // usando o bollean 
 
 		
-		System.out.print("Digite o N usuário entre 0 e 1 : \n"); //entrada usuario
+		System.out.print("Digite a taxa de aprendizado entre 0 e 1 : \n"); //entrada usuario
 		Nusuario = sc.nextDouble();
-		System.out.print("Digite o TéTa que é o limiar:	 \n"); //entrada usuario
+		System.out.print("Digite o TÃ©Ta que Ã© o limiar:	 \n"); //entrada usuario
 		limiarTeta = sc.nextDouble();
 
 		
+	
 		WentradaPesos = new double[] { 0, 0, 0, 0 };// pesos zerados 
 		
 		entradaX = new double[][] { // tabela 
@@ -40,17 +41,17 @@ public class RedeNeural {
 			{ 0, 0, 1, 1 }, 
 			{ 0, 0, 0, 1 } 
 		};
-		Tresultado = AND(); //chamada metodo
-		vetorFyent = new int[8]; //vetor função
-
-		while (operacao) {  //while para operação 
-			control = 0;
+		TresultadoAnd = AND(); //chamada metodo
+		vetorFyent = new int[8]; //vetor funÃ§Ã£o
+		control = 0;
+		while (control == 8) {  //while para operaÃ§Ã£o 
+			
 
 			for (int i = 0; i < entradaX.length; i++) {
 				yentCalculo = 0;
 
 				for (int k = 0; k < 4; k++) {
-					yentCalculo = entradaX[i][k] + yentCalculo * WentradaPesos[k];  //calculo da funçao 
+					yentCalculo += entradaX[i][k]  * WentradaPesos[k];  //calculo da funÃ§ao   Yent =  ï“ (X . W)  +  b somÃ¡torio neuronios
 				}
 
 				if (yentCalculo > limiarTeta) {
@@ -64,9 +65,9 @@ public class RedeNeural {
 					vetorFyent[i] = fyent;
 				}
 
-				if (fyent != Tresultado[i]) {     //calculo fyente for diferente resultado fazer equação
-					for (int a = 0; a < WentradaPesos.length; a++) {
-						WentradaPesos[a] = WentradaPesos[a] +  Nusuario * (Tresultado[i] - fyent) * entradaX[i][a];
+				if (fyent != TresultadoAnd[i]) {     //calculo fyente for diferente resultado fazer equaÃ§Ã£o  ï„W  =   ï¨ . [ T â€“ f (Yent) ] . X calculo neuronio
+					for (int G = 0; G < WentradaPesos.length; G++) {
+						WentradaPesos[G] += WentradaPesos[G] * (TresultadoAnd[i] - fyent) * entradaX[i][G];
 					}
 				} else {
 					control++;
@@ -74,7 +75,7 @@ public class RedeNeural {
 			}
 
 			if (control == 8) {
-				operacao = false;
+				//operacao = false;
 
 				System.out.print("Pesos Atualizados: \n");   //resultado dos pesos 
 				for (double contadorAuxPesos : WentradaPesos) {
@@ -89,17 +90,18 @@ public class RedeNeural {
 			epocaContador++;
 		}
 		System.out.println("");
-		System.out.println("Épocas rodadas para atualizar os pesos \n" + epocaContador); // época rodadas pela entradas do usuario
+		System.out.println("Ã‰pocas rodadas para atualizar os pesos \n" + epocaContador); // Ã©poca rodadas pela entradas do usuario
 
 		
 		//variaveis para teste
-		int XtesteResultado[];
 		double testeYent = 0;
+		int XtesteResultado[];
+		
 
 	
-		System.out.println("#####################    Testando Resultado AND  #################################################");
+		System.out.println("#####################    Testando Resultado   #################################################");
 		System.out.println("#############################   teste   #######################################################");
-		System.out.println("#############################   Abaixo  #######################################################");
+		System.out.println("#############################    AND     #######################################################");
 		System.out.println("Entrada para Teste Digite 0 ou 1");
 
 		//teste and 
@@ -114,17 +116,17 @@ public class RedeNeural {
 				XtesteResultado[i] = sc.nextInt();
 			}
 		}
-		//equação 
+		//equaÃ§Ã£o 
 		for (int i = 0; i < WentradaPesos.length; i++) {
-			testeYent = XtesteResultado[i] + testeYent * WentradaPesos[i];
+			testeYent += XtesteResultado[i] * WentradaPesos[i];
 		}
-		//condiçoes 
+		//condiÃ§oes 
 		if (testeYent > limiarTeta) {
-			System.out.println("Resposta eh  " + 1);
+			System.out.println("Resposta do Ãºltimo sendo AND Ã©:   " + +1);
 		} else if (testeYent <= limiarTeta && testeYent <= limiarTeta) {
-			System.out.println("Resposta eh  " + 0);
+			System.out.println("Resposta do Ãºltimo sendo AND Ã©:  " + 0);
 		} else {
-			System.out.println("Resposta eh  " + -1);
+			System.out.println("Resposta do Ãºltimo sendo AND Ã©:  " + 1);
 		}
 
 		sc.close();
