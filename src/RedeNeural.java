@@ -9,7 +9,7 @@ public class RedeNeural {
 		sc.useLocale(Locale.ENGLISH);
 		Locale.setDefault(new Locale("en", "US"));
 		
-		double entradaX[][], //entrada x 
+		int entradaX[][], //entrada x 
 		WentradaPesos[],  //entrada pesos  
 		Nusuario,   // entrada digitada pelo usuario  
 		yentCalculo = 0, //variaveis para calculo
@@ -23,15 +23,15 @@ public class RedeNeural {
 
 		
 		System.out.print("Digite a taxa de aprendizado entre 0 e 1 : \n"); //entrada usuario
-		Nusuario = sc.nextDouble();
+		Nusuario = sc.nextInt();
 		System.out.print("Digite o TéTa que é o limiar:	 \n"); //entrada usuario
-		limiarTeta = sc.nextDouble();
+		limiarTeta = sc.nextDou();
 
 		
 	
-		WentradaPesos = new double[] { 0, 0, 0, 0 };// pesos zerados 
+		WentradaPesos = new int[] { 0, 0, 0, 0 };// pesos zerados 
 		
-		entradaX = new double[][] { // tabela 
+		entradaX = new int[][] { // tabela 
 			{ 1, 1, 1, 1 }, 
 			{ 1, 1, 0, 1 }, 
 			{ 1, 0, 1, 1 }, 
@@ -77,15 +77,14 @@ public class RedeNeural {
 			if (operacao) {
 				operacao = false;
 
-				System.out.print("Pesos Atualizados: \n");   //resultado dos pesos 
-				for (double contadorAuxPesos : WentradaPesos) {
-					System.out.print(contadorAuxPesos + " \n");
-				}
+
+				System.out.println(control + " p1= " + WentradaPesos[0] + " p2= " + WentradaPesos[1] + " p3= "
+				+ WentradaPesos[2] + " p4= " + WentradaPesos[3] + " epoca= " + epocaContador);
 				
 				System.out.println("");
 				for (int contadorAux : vetorFyent) {
 					System.out.print(contadorAux + " ");
-				}
+				}	
 			}
 			epocaContador++;
 		}
