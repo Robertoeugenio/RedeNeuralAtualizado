@@ -12,7 +12,7 @@ public class RedeNeural {
 		double entradaX[][], //entrada x 
 		WentradaPesos[],  //entrada pesos  
 		Nusuario,   // entrada digitada pelo usuario  
-		yentCalculo, //variaveis para calculo
+		yentCalculo = 0, //variaveis para calculo
 		limiarTeta; // Tèta
 		int fyent, // variaveis calculo
 		control, // variavel para contador 
@@ -51,7 +51,7 @@ public class RedeNeural {
 				yentCalculo = 0;
 
 				for (int k = 0; k < 4; k++) {
-					yentCalculo += entradaX[i][k]  * WentradaPesos[k];  //calculo da funçao   Yent =   (X . W)  +  b somátorio neuronios
+					yentCalculo += entradaX[i][k] * WentradaPesos[k];  //calculo da funçao   Yent =   (X . W)  +  b somátorio neuronios
 				}
 
 				if (yentCalculo > limiarTeta) {
@@ -67,7 +67,7 @@ public class RedeNeural {
 
 				if (fyent != TresultadoAnd[i]) {     //calculo fyente for diferente resultado fazer equação  W  =    . [ T – f (Yent) ] . X calculo neuronio
 					for (int G = 0; G < WentradaPesos.length; G++) {
-						WentradaPesos[G] += WentradaPesos[G] * (TresultadoAnd[i] - fyent) * entradaX[i][G];
+						WentradaPesos[G] += Nusuario * (TresultadoAnd[i] - fyent) * entradaX[i][G];
 					}
 				} else {
 					control++;
